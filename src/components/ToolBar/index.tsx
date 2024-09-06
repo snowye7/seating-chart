@@ -2,10 +2,10 @@ import excelPng from "@png/excel.png"
 import { message, Tooltip } from "antd"
 import { ImportExcel } from "deepsea-components"
 import { FC, PropsWithChildren, useRef, useState } from "react"
-import { Student } from "../../App"
 import { useLocalStorageState } from "ahooks"
-import { STUDENTS_LOCAL_KEY } from "../../constant"
+import { STUDENTS_GROUP_KEY, STUDENTS_LOCAL_KEY } from "../../constant"
 import { nanoid } from "nanoid"
+import { useGroup, usePeople } from "../../hooks"
 
 type ToolBarItemProps = {
     onClick: () => void
@@ -30,9 +30,9 @@ export const ToolBar: FC<ToolBarProps> = props => {
         importExcelRef.current?.click()
     }
 
-    const [people, setPeople] = useLocalStorageState(STUDENTS_LOCAL_KEY, {
-        listenStorageChange: true
-    })
+    const [people, setPeople] = usePeople()
+
+    const [group, setGroup] = useGroup()
 
     const importExcelRef = useRef<HTMLInputElement | null>(null)
 
@@ -48,6 +48,7 @@ export const ToolBar: FC<ToolBarProps> = props => {
                             return
                         }
                         setPeople(names.map(it => ({ name: it, id: nanoid() })))
+                        setGroup(null)
                     }}
                     className="hidden"
                     ref={importExcelRef}

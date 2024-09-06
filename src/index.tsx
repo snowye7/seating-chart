@@ -11,13 +11,14 @@ const primaryColor = "#5b57d1"
 
 const secondaryColor = "#e0dfff"
 
-const ThemeApp: FC<PropsWithChildren> = props => {
+const ThemeApp: FC = () => {
     const [theme, setTheme] = useTheme()
     return (
         <ConfigProvider
             locale={zhCh}
             theme={{
                 cssVar: true,
+                algorithm: theme === "light" ? AntdTheme.defaultAlgorithm : AntdTheme.darkAlgorithm,
                 token: {
                     colorPrimary: primaryColor
                 },
@@ -26,12 +27,12 @@ const ThemeApp: FC<PropsWithChildren> = props => {
                         colorBgSpotlight: primaryColor
                     },
                     Segmented: {
-                        itemSelectedBg: secondaryColor
+                        itemSelectedBg: theme === "light" ? secondaryColor : primaryColor
                     }
                 }
             }}
         >
-            {props.children}
+            <App></App>
         </ConfigProvider>
     )
 }
@@ -39,5 +40,5 @@ const ThemeApp: FC<PropsWithChildren> = props => {
 const rootEl = document.getElementById("root")
 if (rootEl) {
     const root = ReactDOM.createRoot(rootEl)
-    root.render(<App />)
+    root.render(<ThemeApp />)
 }

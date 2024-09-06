@@ -15,4 +15,18 @@ body {
     user-select: none;
     background-color: var(--bgColor);
     color: var(--textColor);
+    
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #7c3aed99;
+        border-radius: 10px;
+    }
 }

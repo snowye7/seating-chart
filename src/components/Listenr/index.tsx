@@ -1,6 +1,5 @@
 import { useRequest } from "ahooks"
-import { FC, useCallback, useEffect } from "react"
-import { useTheme } from "../Theme"
+import { FC, useEffect } from "react"
 
 export function getSize() {
     return {
@@ -35,32 +34,6 @@ export const Listenr: FC = props => {
         window.addEventListener("resize", handler)
         return () => window.removeEventListener("resize", handler)
     }, [])
-
-    const [theme] = useTheme()
-
-    const handle = useCallback((e: MediaQueryListEvent) => {
-        if (e.matches) {
-            document.documentElement.setAttribute("data-theme", "dark")
-        } else {
-            document.documentElement.setAttribute("data-theme", "light")
-        }
-    }, [])
-
-    useEffect(() => {
-        const mediaQueryList = window.matchMedia("(prefers-color-scheme:dark)")
-
-        if (theme !== "system") {
-            document.documentElement.setAttribute("data-theme", theme!)
-            mediaQueryList.removeEventListener("change", handle)
-            return
-        }
-
-        document.documentElement.setAttribute("data-theme", mediaQueryList.matches ? "dark" : "light")
-
-        mediaQueryList.addEventListener("change", handle)
-
-        return () => mediaQueryList.removeEventListener("change", handle)
-    }, [theme])
 
     return null
 }
