@@ -1,0 +1,35 @@
+{
+    "name": "seating-chart",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "rsbuild dev --open",
+        "build": "rsbuild build",
+        "preview": "rsbuild preview"
+    },
+    "dependencies": {
+        "@ant-design/icons": "^5.4.0",
+        "ahooks": "^3.8.1",
+        "antd": "^5.20.5",
+        "deepsea-components": "^5.5.14",
+        "nanoid": "^5.0.7",
+        "react": "^18.3.1",
+        "react-beautiful-dnd": "^13.1.1",
+        "react-dom": "^18.3.1",
+        "snowye-tools": "^0.0.7"
+    },
+    "devDependencies": {
+        "@rsbuild/core": "1.0.1-rc.4",
+        "@rsbuild/plugin-react": "1.0.1-rc.4",
+        "@types/react": "^18.3.5",
+        "@types/react-beautiful-dnd": "^13.1.8",
+        "@types/react-dom": "^18.3.0",
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.45",
+        "postcss-loader": "^8.1.1",
+        "prettier": "^3.3.3",
+        "prettier-plugin-tailwindcss": "^0.6.6",
+        "tailwindcss": "^3.4.10",
+        "typescript": "^5.5.2"
+    }
+}
