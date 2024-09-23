@@ -30,9 +30,8 @@ export const Listenr: FC = props => {
     const { refresh } = useWindowSize()
 
     useEffect(() => {
-        const handler = refresh
-        window.addEventListener("resize", handler)
-        return () => window.removeEventListener("resize", handler)
+        window.addEventListener("resize", refresh)
+        return () => window.removeEventListener("resize", refresh)
     }, [])
 
     return null

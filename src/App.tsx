@@ -1,13 +1,14 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { DragDropContext, Draggable, Droppable, DropResult } from "react-beautiful-dnd"
 import { clsx } from "snowye-tools"
-import { Listenr, Theme, ToolBar, useWindowSize } from "./components"
+import { Listenr, Theme, ToolBar, useTheme, useWindowSize } from "./components"
 import { AddGroup } from "./components/AddGroup"
 import { useGroup, usePeople } from "./hooks"
+import { App as AntdApp } from "antd"
 
 const Header: FC = () => {
     return (
-        <header className="relative flex h-[60px] items-center justify-center">
+        <header className="relative flex h-[100px] items-center justify-center">
             <ToolBar />
             <Theme />
         </header>
@@ -16,6 +17,12 @@ const Header: FC = () => {
 
 const App = () => {
     const { width, height } = useWindowSize()
+
+    const { message } = AntdApp.useApp()
+
+    window.message = message
+
+    const [theme] = useTheme()
 
     const [people] = usePeople()
 
@@ -45,11 +52,11 @@ const App = () => {
 
     const leftWidth = (width - 80 - 40) / 6
 
-    const sourceItemWidth = leftWidth - 32
+    const sourceItemWidth = Math.floor(leftWidth - 32)
 
     const groupLength = Object.keys(group ?? {}).length - 1
 
-    const targetItemWidth = group ? (leftWidth * 5 - 16 - groupLength * 8) / groupLength - 32 : 99999999999
+    const targetItemWidth = group ? Math.floor((leftWidth * 5 - 16 - groupLength * 8) / groupLength - 32) : 99999999999
 
     const blockWidth = Math.min(sourceItemWidth, targetItemWidth)
 
@@ -60,15 +67,15 @@ const App = () => {
             <Listenr></Listenr>
             <Header></Header>
             <DragDropContext onDragEnd={onDragEnd}>
-                <div className="flex gap-10 px-10 py-10" style={{ height: height - 60 }}>
+                <div className="flex gap-10 px-10 pb-10" style={{ height: height - 100 }}>
                     <Droppable droppableId="source">
                         {(provided, dragInfo) => {
                             return (
-                                <div {...provided.droppableProps} style={{ width: leftWidth }} ref={provided.innerRef} className={clsx("col-span-1 flex flex-col justify-between gap-2 overflow-y-scroll rounded-md bg-violet-200 px-4 py-4", dragInfo.isDraggingOver && "bg-amber-100")}>
+                                <div {...provided.droppableProps} style={{ width: leftWidth }} ref={provided.innerRef} className={clsx("flex flex-col items-center overflow-y-auto rounded-md", theme === "light" ? "bg-secondary" : "bg-darkBg", dragInfo.isDraggingOver && (theme === "light" ? "bg-amber-100" : "bg-amber-200"))}>
                                     {(group ? group["source"] : people)?.map((it, idx) => (
                                         <Draggable key={it.id} draggableId={it.id} index={idx}>
                                             {provided => (
-                                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="h-14 py-1">
                                                     <div style={{ width: blockWidth }} className={clsx("flex h-12 flex-none items-center justify-center rounded-md bg-violet-600 text-white")}>
                                                         {it.name}
                                                     </div>
@@ -82,27 +89,27 @@ const App = () => {
                         }}
                     </Droppable>
 
-                    <div className="flex h-full gap-2 rounded-md border-[3px] border-dashed border-secondary" style={{ width: leftWidth * 5 }}>
+                    <div className={"flex h-full gap-2 rounded-md border-[3px] border-dashed border-secondary"} style={{ width: leftWidth * 5 }}>
                         {!group ? (
                             <AddGroup />
                         ) : (
                             <div className="flex h-full w-full flex-col gap-4 py-2">
-                                <div className="mx-auto flex h-[60px] w-[280px] flex-none items-center justify-center rounded-lg bg-amber-200 text-2xl">讲台</div>
+                                <div className={clsx("mx-auto flex h-[60px] w-[280px] flex-none items-center justify-center rounded-lg text-2xl", theme === "light" ? "bg-secondary" : "bg-[#403e6a]")}>讲台</div>
                                 <div className="flex h-full gap-2 px-2">
                                     {Object.entries(group)
                                         .filter(([key]) => key !== "source")
                                         .map(([key, students], idx) => {
                                             return (
                                                 <div key={key} className="flex h-full flex-1 flex-col gap-2">
-                                                    <div className="rounded-md bg-amber-100 py-2 text-center text-2xl tracking-widest">第{idx + 1}列</div>
+                                                    <div className={clsx("rounded-md py-2 text-center text-2xl tracking-widest", theme === "light" ? "bg-secondary" : "bg-[#403e6a]")}>第{idx + 1}列</div>
                                                     <Droppable droppableId={key}>
                                                         {(provided, dragInfo) => {
                                                             return (
-                                                                <div {...provided.droppableProps} ref={provided.innerRef} className={clsx("flex flex-col gap-2 rounded-md bg-secondary p-4", dragInfo.isDraggingOver && "bg-amber-100")} style={{ height: contanierHeight - 16 - 60 - 16 - 8 - 48 }}>
+                                                                <div {...provided.droppableProps} ref={provided.innerRef} className={clsx("flex flex-col items-center overflow-y-auto rounded-md py-4", theme === "light" ? "bg-secondary" : "bg-darkBg", dragInfo.isDraggingOver && (theme === "light" ? "bg-amber-100" : "bg-amber-200"))} style={{ height: contanierHeight - 16 - 60 - 16 - 8 - 48 }}>
                                                                     {students.map((it, idx) => (
                                                                         <Draggable key={it.id} draggableId={it.id} index={idx}>
                                                                             {provided => (
-                                                                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="h-14 py-1">
                                                                                     <div className={clsx("flex h-12 flex-none items-center justify-center rounded-md bg-violet-600 text-white")} style={{ width: blockWidth }}>
                                                                                         {it.name}
                                                                                     </div>

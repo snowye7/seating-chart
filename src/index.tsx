@@ -1,11 +1,19 @@
 import ReactDOM from "react-dom/client"
 import App from "./App"
-import { ConfigProvider, theme as AntdTheme } from "antd"
+import { ConfigProvider, theme as AntdTheme, App as AntdApp } from "antd"
 import zhCh from "antd/es/locale/zh_CN"
 import "./index.css"
 import "./css/theme.css"
 import { FC, PropsWithChildren } from "react"
 import { useTheme } from "./components"
+import { MessageInstance } from "antd/es/message/interface"
+
+declare global {
+    const message: MessageInstance
+    interface Window {
+        message: MessageInstance
+    }
+}
 
 const primaryColor = "#5b57d1"
 
@@ -32,7 +40,9 @@ const ThemeApp: FC = () => {
                 }
             }}
         >
-            <App></App>
+            <AntdApp message={{ maxCount: 1 }}>
+                <App></App>
+            </AntdApp>
         </ConfigProvider>
     )
 }

@@ -1,6 +1,6 @@
 html[data-theme="dark"] {
     --bgColor: #000;
-    --textColor: #ffffff90;
+    --textColor: #ffffff;
 }
 
 :root {

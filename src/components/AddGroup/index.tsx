@@ -2,9 +2,6 @@ import { FileAddOutlined } from "@ant-design/icons"
 import { Button, InputNumber } from "antd"
 import { FC, useState } from "react"
 import { Student, useGroup, usePeople } from "../../hooks"
-import { nanoid } from "nanoid"
-
-//创建一个长度为10的数组
 
 export const AddGroup: FC = () => {
     const [groupNumber, setGroupNumber] = useState(6)
