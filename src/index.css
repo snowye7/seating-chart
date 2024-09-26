@@ -15,7 +15,7 @@ body {
     user-select: none;
     background-color: var(--bgColor);
     color: var(--textColor);
-    
+
     ::-webkit-scrollbar {
         width: 8px;
     }
@@ -29,4 +29,11 @@ body {
         background: #7c3aed99;
         border-radius: 10px;
     }
+}
+
+a,
+button,
+input[type="submit"],
+[role="button"] {
+    cursor: none;
 }

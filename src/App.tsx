@@ -1,8 +1,7 @@
 import { FC, useEffect } from "react"
 import { DragDropContext, Draggable, Droppable, DropResult } from "react-beautiful-dnd"
 import { clsx } from "snowye-tools"
-import { Listenr, Theme, ToolBar, useTheme, useWindowSize } from "./components"
-import { AddGroup } from "./components/AddGroup"
+import { AddGroup, Listenr, Theme, ToolBar, useTheme, useWindowSize } from "./components"
 import { useGroup, usePeople } from "./hooks"
 import { App as AntdApp } from "antd"
 

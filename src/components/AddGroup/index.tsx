@@ -18,8 +18,8 @@ export const AddGroup: FC = () => {
 
     return (
         <div className="flex h-full w-full flex-col items-center justify-center gap-4">
-            <div className="flex gap-2">
-                <img src={theme === "light" ? logoLight : logoDark} alt="" width={40} height={40} />
+            <div className="flex items-center gap-2">
+                <img src={theme === "light" ? logoLight : logoDark} alt="" />
                 <div className={clsx("flex gap-2 text-4xl", theme === "light" ? "text-primary" : "text-secondary")}>Seating Chart</div>
             </div>
             <div className="text-xl text-gray-400">
