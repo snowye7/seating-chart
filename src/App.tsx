@@ -31,6 +31,7 @@ const App = () => {
     const onDragEnd = (result: DropResult) => {
         if (!group) return
         const { source, destination } = result
+
         if (!destination || (source.droppableId === destination.droppableId && source.index === destination.index)) {
             return
         }
