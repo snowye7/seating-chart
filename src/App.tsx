@@ -14,6 +14,21 @@ const Header: FC = () => {
     )
 }
 
+type BlockPorps = {
+    name: string
+    width: number
+}
+
+const Block: FC<BlockPorps> = props => {
+    const { name, width } = props
+
+    return (
+        <div style={{ width }} className={clsx("flex h-12 flex-none items-center justify-center rounded-md bg-violet-600 text-white transition-all hover:bg-violet-800")}>
+            {name}
+        </div>
+    )
+}
+
 const App = () => {
     const { width, height } = useWindowSize()
 
@@ -76,9 +91,7 @@ const App = () => {
                                         <Draggable key={it.id} draggableId={it.id} index={idx}>
                                             {provided => (
                                                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="h-14 py-1">
-                                                    <div style={{ width: blockWidth }} className={clsx("flex h-12 flex-none items-center justify-center rounded-md bg-violet-600 text-white")}>
-                                                        {it.name}
-                                                    </div>
+                                                    <Block name={it.name} width={blockWidth}></Block>
                                                 </div>
                                             )}
                                         </Draggable>
@@ -110,9 +123,7 @@ const App = () => {
                                                                         <Draggable key={it.id} draggableId={it.id} index={idx}>
                                                                             {provided => (
                                                                                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="h-14 py-1">
-                                                                                    <div className={clsx("flex h-12 flex-none items-center justify-center rounded-md bg-violet-600 text-white")} style={{ width: blockWidth }}>
-                                                                                        {it.name}
-                                                                                    </div>
+                                                                                    <Block name={it.name} width={blockWidth}></Block>
                                                                                 </div>
                                                                             )}
                                                                         </Draggable>

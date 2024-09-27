@@ -20,7 +20,7 @@ const ToolBarItem: FC<ToolBarItemProps> = props => {
 
     return (
         <Tooltip title={title}>
-            <div className={clsx("flex h-9 w-9 items-center justify-center rounded-md", theme === "light" ? "hover:bg-secondary" : "hover:bg-primary")} onClick={() => onClick?.()}>
+            <div className={clsx("flex h-9 w-9 cursor-pointer items-center justify-center rounded-md", theme === "light" ? "hover:bg-secondary" : "hover:bg-primary")} onClick={() => onClick?.()}>
                 {children}
             </div>
         </Tooltip>
