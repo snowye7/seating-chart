@@ -1,7 +1,7 @@
-import { Segmented } from "antd"
-import { FC, useCallback, useEffect, useState } from "react"
 import { DesktopOutlined, MoonOutlined, SunOutlined } from "@ant-design/icons"
 import { useLocalStorageState, useMemoizedFn } from "ahooks"
+import { Segmented } from "antd"
+import { FC, useEffect } from "react"
 import { STUDENTS_THEME_KEY, STUDENTS_THEME_SELECT_KEY } from "../../constant"
 
 export type Themes = "light" | "dark"
@@ -22,7 +22,7 @@ export const Theme: FC = () => {
     const [theme, setTheme] = useTheme()
 
     const [value, setValue] = useLocalStorageState<ThemeEnum>(STUDENTS_THEME_SELECT_KEY, {
-        defaultValue: ThemeEnum.浅色,
+        defaultValue: ThemeEnum.系统,
         listenStorageChange: true
     })
 
