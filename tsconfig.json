@@ -13,7 +13,8 @@
         "useDefineForClassFields": true,
         "allowImportingTsExtensions": true,
         "paths": {
-            "@png/*": ["./src/assets/images/*"]
+            "@png/*": ["./src/assets/images/*"],
+            "@svg/*": ["./src/assets/svg/*"]
         }
     },
     "include": ["src"]

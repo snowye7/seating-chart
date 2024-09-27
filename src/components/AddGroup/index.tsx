@@ -4,8 +4,10 @@ import { FC, useState } from "react"
 import { Student, useGroup, usePeople } from "../../hooks"
 import { clsx } from "snowye-tools"
 import { useTheme } from "../Theme"
-import logoDark from "@png/logo-dark.png"
-import logoLight from "@png/logo-light.png"
+// import logoDark from "@png/logo-dark.png"
+// import logoLight from "@png/logo-light.png"
+import logoDarkSvg from "@svg/logo-dark.svg"
+import logoLightSvg from "@svg/logo-light.svg"
 
 export const AddGroup: FC = () => {
     const [theme] = useTheme()
@@ -19,7 +21,8 @@ export const AddGroup: FC = () => {
     return (
         <div className="flex h-full w-full flex-col items-center justify-center gap-4">
             <div className="flex items-center gap-2">
-                <img src={theme === "light" ? logoLight : logoDark} alt="" />
+                {/* <img src={theme === "light" ? logoLight : logoDark} alt="" /> */}
+                {theme === "light" ? <img src={logoLightSvg} alt="" /> : <img src={logoDarkSvg} alt="" />}
                 <div className={clsx("flex gap-2 text-4xl", theme === "light" ? "text-primary" : "text-secondary")}>Seating Chart</div>
             </div>
             <div className="text-xl text-gray-400">

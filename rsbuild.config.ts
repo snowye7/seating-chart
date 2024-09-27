@@ -8,6 +8,6 @@ export default defineConfig({
     },
     html: {
         title: "Seating Chart",
-        favicon: "./public/logo.png"
+        favicon: "./public/logo.svg"
     }
 })

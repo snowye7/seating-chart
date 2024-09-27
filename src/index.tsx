@@ -1,12 +1,12 @@
+import { App as AntdApp, theme as AntdTheme, ConfigProvider } from "antd"
+import zhCh from "antd/es/locale/zh_CN"
+import { MessageInstance } from "antd/es/message/interface"
+import { FC } from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App"
-import { ConfigProvider, theme as AntdTheme, App as AntdApp } from "antd"
-import zhCh from "antd/es/locale/zh_CN"
-import "./index.css"
-import "./css/theme.css"
-import { FC, PropsWithChildren } from "react"
 import { useTheme } from "./components"
-import { MessageInstance } from "antd/es/message/interface"
+import "./css/theme.css"
+import "./index.css"
 
 declare global {
     const message: MessageInstance
